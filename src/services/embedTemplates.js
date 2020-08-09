@@ -40,6 +40,9 @@ function GameEmbed(){
 }
 
 module.exports = {
+    footershort: footershort,
+    footerlong: footerlong,
+
     cmderrEmbed: CommandErrorEmbed,
     cmdsuccessEmbed: CommandSuccessEmbed,
     infoEmbed: InfoEmbed,

@@ -7,8 +7,8 @@ const embedTemplates = require('./services/embedTemplates');
 
 let Services = {
     prefix: BOT_CONFIG.PREFIX,
-    footerlong: 'I am best girl. "But Moeka is.." Nope yandere-esk types are bad.\nNow that\'s a science fact for you.',
-    footershort: 'I am best girl',
+    footerlong: embedTemplates.footerlong,
+    footershort: embedTemplates.footershort,
     Discord: Discord,
 
     CommandErrorEmbed: embedTemplates.cmderrEmbed,
