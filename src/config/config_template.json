@@ -1,0 +1,6 @@
+{ 
+    "BOT_CONFIG" : {
+        "TOKEN" : "TOKEN GOES HERE. RENAME THIS FILE TO 'config.json'",
+        "PREFIX" : "PREFIX HERE"
+    }
+}

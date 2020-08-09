@@ -1,0 +1,15 @@
+let Async = async(client, message, args, services) =>{
+    
+}
+
+module.exports = {
+    run: Async,
+    command: '',
+    alias: [''],
+    perms: [],
+    argsmin: 0,
+    argsmax: 0,  
+    
+    description: '',
+    example: ['']
+}
