@@ -45,7 +45,7 @@ let KickAsync = async(client, message, args, services) =>{
 module.exports = {
     run: KickAsync,
     command: 'kick',
-    alias: [''],
+    alias: [],
     perms: ['KICK_MEMBERS'],
     argsmin: 1,
     argsmax: -1,
