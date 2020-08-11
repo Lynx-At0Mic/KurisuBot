@@ -1,5 +1,5 @@
 let helpAsync = async(client, message, args, services) => {
-    if(args.length === 0 || parseInt(args[0])){
+    if(args.length === 0 || !RegExp('[a-z]').test(args[0])){
         if(!parseInt(args[0])){ args[0] = '1';}
         args[0] = parseInt(args[0]);
         let maxPage = Math.ceil(services.commandGroups.length / 9);
