@@ -20,10 +20,10 @@ class Database{
         console.log('Database connection terminated');
     }
 
-    async query(sql){
-        let queryResult = await this.db.query(sql).catch(err => {console.log(err); return false;});
+    async query(sql, args=[]){
+        let queryResult = await this.db.query(sql, args).catch(err => {console.log(err); return false;});
         if(queryResult[0] == '') return false;
-        return queryResult[0];
+        return queryResult[0][0];
     }
 }
 
