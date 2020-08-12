@@ -26,7 +26,7 @@ class Command{
     }
 }
 
-class Handler{
+class CmdHandler{
 
     constructor(client, services){
         this.client = client;
@@ -112,4 +112,4 @@ class Handler{
     }
 }
 
-module.exports = Handler;
+module.exports = CmdHandler;

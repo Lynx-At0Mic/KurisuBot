@@ -1,15 +1,21 @@
 const Discord = require('discord.js');
 //const Canvas = require('canvas');
-const {BOT_CONFIG} = require('./config/config.json');
+const {BOT_CONFIG, DB_CONFIG} = require('./config/config.json');
 const path = require('path');
-const Handler = require('./services/commandHandler');
+const CmdHandler = require('./services/commandHandler');
+const Database = require('./services/databaseHandler');
 const embedTemplates = require('./services/embedTemplates');
+
+const client = new Discord.Client();
+let db = new Database(DB_CONFIG.USERNAME, DB_CONFIG.PASSWORD,
+    DB_CONFIG.HOST, DB_CONFIG.DATABASE);
 
 let Services = {
     prefix: BOT_CONFIG.PREFIX,
     footerlong: embedTemplates.footerlong,
     footershort: embedTemplates.footershort,
     Discord: Discord,
+    database: db,
 
     CommandErrorEmbed: embedTemplates.cmderrEmbed,
     CommandSuccessEmbed: embedTemplates.cmdsuccessEmbed,
@@ -18,9 +24,8 @@ let Services = {
     GameEmbed: embedTemplates.gameEmbed
 }
 
-const client = new Discord.Client();
-let handler = new Handler(client, Services);
-handler.registerCommandsAsync(path.join(__dirname, 'commands'));
+let commandHandler = new CmdHandler(client, Services);
+commandHandler.registerCommandsAsync(path.join(__dirname, 'commands'));
 
 client.once('ready', () => {
     client.user.setActivity(`prefix: ${BOT_CONFIG.PREFIX} | ${BOT_CONFIG.PREFIX}help | I am best girl`, {type: 'LISTENING'});
@@ -32,7 +37,7 @@ client.on('message', message => {
     if (message.content.toLowerCase().startsWith(BOT_CONFIG.PREFIX) && !message.author.bot){
         if(BOT_CONFIG.PREFIX == 'm.' && message.author.id != 464149197533216779){message.reply('This bot is a development instance. Please use <@736561416344961105> with prefix \'k.\''); return;}
         
-        handler.executeCommandAsync(message);
+        commandHandler.executeCommandAsync(message);
     }
 });
 
@@ -44,4 +49,5 @@ process.on('SIGINT', function() {
     console.log("Caught interrupt signal");
     client.destroy();
     console.log("Client Dead");
+    db.endConnection();
 });
