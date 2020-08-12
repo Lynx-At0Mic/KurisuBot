@@ -2,19 +2,21 @@ const Discord = require('discord.js');
 const footerlong = 'I am best girl. "But Moeka is.." Nope yandere-esk types are bad.\nNow that\'s a science fact for you.';
 const footershort = 'I am best girl';
 
-function CommandErrorEmbed(){
+function CommandErrorEmbed(reason=null){
     embed = new Discord.MessageEmbed()
     .setTitle('Command Error')
     .setColor('#FF0000')
-    .setFooter(footershort);
+    .setDescription(reason);
+    // .setFooter(footershort);
     return embed;
 }
 
-function CommandSuccessEmbed(){
+function CommandSuccessEmbed(reason=null){
     embed = new Discord.MessageEmbed()
     .setTitle('Success')
     .setColor('#08FF00')
-    .setFooter(footershort);
+    .setDescription(reason);
+    // .setFooter(footershort);
     return embed;
 }
 
