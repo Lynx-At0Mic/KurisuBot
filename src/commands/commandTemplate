@@ -11,5 +11,5 @@ module.exports = {
     argsmax: 0,  
     
     description: '',
-    example: ['']
+    example: []
 }

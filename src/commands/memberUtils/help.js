@@ -26,20 +26,22 @@ let helpAsync = async(client, message, args, services) => {
 
     for(let command of services.commands){
         if(command.hasDefinition(args[0])){
-            let helpEmbed = services.HelpEmbed()
-            .setTitle(`Help for '${command.name}'`)
-            .setFooter(services.footershort)
-            .addField('Description', command.description);
-
             let exampleString = '';
-
             for(let examp of command.example){
                 exampleString += services.prefix + examp + '\n';
             }
-            if(exampleString == ''){helpEmbed.addField('Example Usage', 'No examples given', true);}
-            else{helpEmbed.addField('Example Usage', exampleString.trim(), true);}
-            if(command.alias == '' || command.alias === undefined){helpEmbed.addField('Alias\'s', 'None', true);}
-            else{helpEmbed.addField('Alias\'s', command.alias, true);}
+            let aliasString = '';
+            for(let ali of command.alias){
+                aliasString += ali + '\n'
+            }
+
+            let helpEmbed = services.HelpEmbed()
+            .setTitle(`Help for '${command.name}'`)
+            .setFooter(services.footershort)
+            .addField('Description', command.description || 'No description given')
+            .addField('Example Usage', exampleString || 'No examples given', true)
+            .addField('Alias\'s', aliasString || 'None', true);
+            console.log(command.alias);
 
             await message.channel.send(helpEmbed);
             return;
