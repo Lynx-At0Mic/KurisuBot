@@ -4,11 +4,15 @@ const {BOT_CONFIG, DB_CONFIG} = require('./config/config.json');
 const path = require('path');
 const CmdHandler = require('./services/commandHandler');
 const Database = require('./services/databaseHandler');
+const Economy = require('./services/economyService');
 const embedTemplates = require('./services/embedTemplates');
 
+
 const client = new Discord.Client();
-let db = new Database(DB_CONFIG.USERNAME, DB_CONFIG.PASSWORD,
-    DB_CONFIG.HOST, DB_CONFIG.DATABASE);
+const db = new Database(DB_CONFIG.USERNAME, DB_CONFIG.PASSWORD,
+    DB_CONFIG.HOST, DB_CONFIG.DATABASE, DB_CONFIG.TABLES);
+
+const economy = new Economy(db);
 
 let Services = {
     prefix: BOT_CONFIG.PREFIX,
@@ -16,6 +20,7 @@ let Services = {
     footershort: embedTemplates.footershort,
     Discord: Discord,
     database: db,
+    economy: economy,
 
     CommandErrorEmbed: embedTemplates.cmderrEmbed,
     CommandSuccessEmbed: embedTemplates.cmdsuccessEmbed,
@@ -24,7 +29,7 @@ let Services = {
     GameEmbed: embedTemplates.gameEmbed
 }
 
-let commandHandler = new CmdHandler(client, Services);
+const commandHandler = new CmdHandler(client, Services);
 commandHandler.registerCommandsAsync(path.join(__dirname, 'commands'));
 
 client.once('ready', () => {
