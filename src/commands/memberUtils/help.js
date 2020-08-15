@@ -1,5 +1,5 @@
 let helpAsync = async(client, message, args, services) => {
-    if(args.length === 0 || !RegExp('[a-z]').test(args[0])){
+    if(args.length === 0 || !RegExp('[a-zA-Z]').test(args[0])){
         if(!parseInt(args[0])){ args[0] = '1';}
         args[0] = parseInt(args[0]);
         let maxPage = Math.ceil(services.commandGroups.length / 9);
@@ -56,7 +56,7 @@ let helpAsync = async(client, message, args, services) => {
             args[1] = parseInt(args[1]);
             let groupCommandCount = 0;
             for(let command of services.commands){
-                if(command.group.NAME.toLowerCase() == args[0]){ groupCommandCount++; }
+                if(command.group.NAME.toLowerCase() == args[0].toLowerCase()){ groupCommandCount++; }
             }
             let maxPage = Math.ceil(groupCommandCount / 9);
             while(args[1] * 9 >= groupCommandCount + 9){
@@ -72,7 +72,7 @@ let helpAsync = async(client, message, args, services) => {
 
             for(let cmd of services.commands.slice(args[1] * 9)){
                 if(itemCount >= 8){ break; }
-                if(cmd.group.NAME.toLowerCase() != args[0]){ continue; }
+                if(cmd.group.NAME.toLowerCase() != args[0].toLowerCase()){ continue; }
                 helpEmbed.addField(cmd.name, cmd.description, true);
                 itemCount++;
             }
@@ -83,7 +83,7 @@ let helpAsync = async(client, message, args, services) => {
     }
 
     let helpEmbed = services.CommandErrorEmbed()
-    .setTitle('Inavlid command or command group')
+    .setDescription('Inavlid command or command group')
     .setColor('#FF0000');
 
     await message.channel.send(helpEmbed);
