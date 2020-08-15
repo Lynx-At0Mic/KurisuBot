@@ -1,4 +1,10 @@
 let UserInfoAsync = async(client, message, args, services) =>{
+    console.log(message.guild === null);
+    if(message.guild !== null){await GuildUserInfo(message, args, services)}
+    else{await DmUserInfo(message, args, services)}
+}
+
+async function GuildUserInfo(message, args, services){
     let guildUser;
     if(args != ''){
         if(!message.mentions.members.first()){
@@ -50,7 +56,42 @@ let UserInfoAsync = async(client, message, args, services) =>{
 
     await message.channel.send(embed);
     return;
-    
+}
+
+async function DmUserInfo(message, args, services){
+    let user;
+    if(args != ''){
+        if(!message.mentions.users.first()){
+            let embed = services.CommandErrorEmbed()
+            .setDescription('Invalid User');
+
+            await message.channel.send(embed);
+            return;
+        }
+        else{user = message.mentions.users.first();}
+    }
+    else{user = message.author;}
+
+    let activity = user.presence.activities[0];
+
+    if(activity == undefined){ activity = 'None';}
+    else{ activity = activity.name}
+
+    let embed = services.InfoEmbed()
+    .setTitle('User Info')
+    .setDescription(user)
+    .setThumbnail(user.displayAvatarURL())
+    .addField('Username', user.username, true)
+    .addField('Tag', user.discriminator, true)
+    .addField('Status', user.presence.status, true)
+    .addField('Activity', activity, true)
+    .addField('Bot?', user.bot, true)
+    .addField('Account created at', user.createdAt)
+    .addField('ID', user.id);
+
+    await message.channel.send(embed);
+    return;
+
 }
 
 module.exports = {
@@ -60,7 +101,7 @@ module.exports = {
     perms: [],
     argsmin: 0,
     argsmax: 1,
-    guildOnly: true,
+    guildOnly: false,
     
     description: 'Gets information about the specified user.',
     example: ['user <user>', 'user @catte#1111', 'user']
