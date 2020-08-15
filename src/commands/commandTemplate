@@ -8,7 +8,7 @@ module.exports = {
     alias: [],
     perms: [],
     argsmin: 0,
-    argsmax: 0,  
+    argsmax: 0,
     
     description: '',
     example: []
