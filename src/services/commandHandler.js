@@ -36,7 +36,8 @@ class CmdHandler{
 
     async executeCommandAsync(message){
         if(message.guild === null){ return; }
-        let args = message.content.toLowerCase();
+        let args = message.content;
+        // let args = message.content.toLowerCase();  // why did we do this to begin with?
         args = await args.substring(this.services.prefix.length, args.length).split(new RegExp(/\s+/));  // split up arguments and remove prefix
         let usrCommand = args[0].toLowerCase();
         args = args.slice(1);  // remove command from args

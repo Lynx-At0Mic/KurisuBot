@@ -25,7 +25,7 @@ let helpAsync = async(client, message, args, services) => {
     }
 
     for(let command of services.commands){
-        if(command.hasDefinition(args[0])){
+        if(command.hasDefinition(args[0].toLowerCase())){
             let exampleString = '';
             for(let examp of command.example){
                 exampleString += services.prefix + examp + '\n';
@@ -49,7 +49,7 @@ let helpAsync = async(client, message, args, services) => {
     }
 
     for(let group of services.commandGroups){
-        if(group.toLowerCase() == args[0]){
+        if(group.toLowerCase() == args[0].toLowerCase()){
             if(!parseInt(args[1])){ args[1] = '1';}
             args[1] = parseInt(args[1]);
             let groupCount = 0;
