@@ -1,4 +1,5 @@
 {
     "NAME" : "Economy",
+    "DESCRIPTION": "Economy related commands",
     "GROUP_PERMISSIONS": []
 }

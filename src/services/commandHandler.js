@@ -98,12 +98,12 @@ class CmdHandler{
             catch{continue;}
             if (!commandFiles.includes('group.json')){ continue; }
             let groupParams = require(path.join(cmdPath, folder, 'group.json'));
-            commandGroups.push(groupParams.NAME);
+            commandGroups.push(groupParams);
             for(let file of commandFiles){
                 if(file.endsWith('.js') && !file.startsWith('_')){ // js files that start with an underscore are ignored
                     let commandModule = require(path.join(cmdPath, folder, file));
-                    this.commandsList.push(new Command(commandModule.command, groupParams.NAME, commandModule.alias,
-                        commandModule.description, commandModule.example,commandModule, commandModule.argsmin, commandModule.argsmax,
+                    this.commandsList.push(new Command(commandModule.command, groupParams, commandModule.alias,
+                        commandModule.description, commandModule.example, commandModule, commandModule.argsmin, commandModule.argsmax,
                         groupParams.GROUP_PERMISSIONS.concat(commandModule.perms)));
                 }
             }

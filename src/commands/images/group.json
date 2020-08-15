@@ -1,4 +1,5 @@
 {
-    "NAME" : "ImageTools",
+    "NAME" : "Image",
+    "DESCRIPTION": "Image search and modification commands",
     "GROUP_PERMISSIONS": []
 }

@@ -1,4 +1,5 @@
 {
     "NAME" : "Moderation",
+    "DESCRIPTION": "Commands for admins and moderators",
     "GROUP_PERMISSIONS": []
 }
