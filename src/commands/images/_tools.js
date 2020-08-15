@@ -1,4 +1,6 @@
 module.exports = {
+    Canvas: require('canvas'),
+    
     getLastImage: async function(message, limit=5){
         let attachmentList = [];
         await message.channel.messages.fetch({ limit: limit})

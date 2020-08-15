@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-//const Canvas = require('canvas');
 const {BOT_CONFIG, DB_CONFIG} = require('./config/config.json');
 const path = require('path');
 const CmdHandler = require('./services/commandHandler');

@@ -1,4 +1,4 @@
-const {getLastImage} = require('./_tools');
+const {getLastImage, Canvas} = require('./_tools');
 const Canvas = require('canvas');
 let CaptionBottomAsync = async(client, message, args, services) =>{
     let userattachment = await getLastImage(message)
