@@ -49,7 +49,8 @@ module.exports = {
     alias: ['banhammer'],
     perms: ['BAN_MEMBERS'],
     argsmin: 1,
-    argsmax: -1,  
+    argsmax: -1,
+    guildOnly: true,
     
     description: 'Bans the target member from the server. Reason is optional.',
     example: ['ban <user> <reason>','ban @catte#1111 being a weeb']

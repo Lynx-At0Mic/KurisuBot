@@ -28,7 +28,8 @@ module.exports = {
     alias: ['purge', 'cls'],
     perms: ['MANAGE_MESSAGES'],
     argsmin: 1,
-    argsmax: 1,  
+    argsmax: 1,
+    guildOnly: true,
     
     description: 'Deletes the last number of messages specified. Max value is 100.',
     example: ['clear 50', 'purge 100', 'cls 5']

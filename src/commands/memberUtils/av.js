@@ -34,7 +34,8 @@ module.exports = {
     alias: ['avatar', 'useravatar'],
     perms: [],
     argsmin: 0,
-    argsmax: 1,  
+    argsmax: 1,
+    guildOnly: true,
     
     description: 'Gets a user\'s avatar.',
     example: [`av`, `av <user>`]

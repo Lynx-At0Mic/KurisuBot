@@ -25,7 +25,8 @@ module.exports = {
     alias: ['latency'],
     perms: [],
     argsmin: 0,
-    argsmax: 0,  
+    argsmax: 0,
+    guildOnly: false,
     
     description: 'Returns the bot\'s ping in milliseconds.',
     example: ['ping']

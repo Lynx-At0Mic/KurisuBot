@@ -26,7 +26,8 @@ module.exports = {
     alias: ['spin', 'bottle'],
     perms: [],
     argsmin: 1,
-    argsmax: -1,  
+    argsmax: -1,
+    guildOnly: true,
     
     description: 'Spins a bottle (picks a random person mentioned).',
     example: ['bottlespin @catte#1111 @Amadeus @Keegan', 'spin @catte#1111 @Amadeus @Keegan']

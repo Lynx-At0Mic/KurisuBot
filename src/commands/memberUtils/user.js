@@ -59,7 +59,8 @@ module.exports = {
     alias: ['userinfo'],
     perms: [],
     argsmin: 0,
-    argsmax: 1,  
+    argsmax: 1,
+    guildOnly: true,
     
     description: 'Gets information about the specified user.',
     example: ['user <user>', 'user @catte#1111', 'user']

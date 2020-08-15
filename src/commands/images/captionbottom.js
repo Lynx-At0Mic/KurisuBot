@@ -45,6 +45,7 @@ module.exports = {
     perms: [],
     argsmin: 1,
     argsmax: -1,
+    guildOnly: false,
     
     description: 'Captions the last image posted in chat.',
     example: ['captionbottom bruh', 'cap2 this is a fact']

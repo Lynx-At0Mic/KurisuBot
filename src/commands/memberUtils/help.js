@@ -28,22 +28,21 @@ let helpAsync = async(client, message, args, services) => {
     for(let command of services.commands){
         if(command.hasDefinition(args[0].toLowerCase())){
             let exampleString = '';
-            for(let examp of command.example){
+            for(let examp of command.cmdmodule.example){
                 exampleString += services.prefix + examp + '\n';
             }
             let aliasString = '';
-            for(let ali of command.alias){
+            for(let ali of command.cmdmodule.alias){
                 aliasString += ali + '\n'
             }
 
             let helpEmbed = services.HelpEmbed()
-            .setTitle(`Help for '${command.name}'`)
+            .setTitle(`Help for '${command.cmdmodule.command}'`)
             .setFooter(services.footershort)
             .addField('Command group', command.group.NAME, false)
-            .addField('Description', command.description || 'No description given', false)
+            .addField('Description', command.cmdmodule.description || 'No description given', false)
             .addField('Example Usage', exampleString || 'No examples given', true)
             .addField('Alias\'s', aliasString || 'None', true);
-            console.log(command.alias);
 
             await message.channel.send(helpEmbed);
             return;
@@ -73,7 +72,7 @@ let helpAsync = async(client, message, args, services) => {
             for(let cmd of services.commands.slice(args[1] * 9)){
                 if(itemCount >= 8){ break; }
                 if(cmd.group.NAME.toLowerCase() != args[0].toLowerCase()){ continue; }
-                helpEmbed.addField(cmd.name, cmd.description, true);
+                helpEmbed.addField(cmd.cmdmodule.command, cmd.cmdmodule.description, true);
                 itemCount++;
             }
 
@@ -96,7 +95,8 @@ module.exports = {
     alias: [],
     perms: [],
     argsmin: 0,
-    argsmax: 2,  
+    argsmax: 2,
+    guildOnly: false,
     
     description: 'Shows information about all commands.',
     example: ['help', 'help av', 'help member_utilities']

@@ -35,7 +35,8 @@ module.exports = {
     alias: ['fuck,keeganpostedsomefuckingweirdshitnuke#media'],
     perms: ['ADMINISTRATOR'],
     argsmin: 0,
-    argsmax: 0,  
+    argsmax: 0,
+    guildOnly: true,
     
     description: 'Deletes the current channel and creates it again',
     example: ['nuke']

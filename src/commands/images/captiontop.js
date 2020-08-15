@@ -45,7 +45,8 @@ module.exports = {
     alias: ['caption1', 'caption', 'captop', 'cap1', 'cap'],
     perms: [],
     argsmin: 1,
-    argsmax: -1,  
+    argsmax: -1,
+    guildOnly: false,
     
     description: 'Captions the last image posted in chat.',
     example: ['caption You\'re going to brazil']

@@ -49,6 +49,7 @@ module.exports = {
     perms: ['KICK_MEMBERS'],
     argsmin: 1,
     argsmax: -1,
+    guildOnly: true,
     
     description: 'Kicks a member. Reason is optional.',
     example: ['kick <user> <reason>', 'kick @catte#1111', 'kick @Keegan yanderes...']

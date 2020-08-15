@@ -24,7 +24,8 @@ module.exports = {
     alias: ['magic8ball', 'magicball'],
     perms: [],
     argsmin: 1,
-    argsmax: -1,  
+    argsmax: -1,
+    guildOnly: false,
     
     description: 'Asks magic 8ball a question',
     example: ['8ball <question>', '8ball am i stupid']
