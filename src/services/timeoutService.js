@@ -13,8 +13,8 @@ class Timeout{
         if(Date.now() - result[this.command] >= this.timeout){
             return false;
         }
-        else{
-            return Math.floor((Date.now() - result[this.command]) / 1000);
+        else{ 
+            return Math.floor((this.timeout - (Date.now() - result[this.command])) / 1000);
         }
     }
     async reset(guildid, userid, date){
