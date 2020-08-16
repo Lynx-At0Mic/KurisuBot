@@ -28,6 +28,18 @@ class Database{
         if(dbError){throw new Error('Database error!');}
     }
     
+    async verifyColumn(table, column, creationSQL){
+        let dbError = false;
+        await this.db.query(`SELECT ${column} FROM ${table}`)
+        .catch(async err => {
+            if(err.code == 'ER_BAD_FIELD_ERROR'){
+                await this.db.query(creationSQL);
+            }
+            else{dbError = true;}
+        });
+        if(dbError){throw new Error('Database error!');}
+    }
+
     endConnection(){
         this.db.end();
         this.dbConnected = false;

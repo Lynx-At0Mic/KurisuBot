@@ -1,10 +1,12 @@
 const fs = require('fs').promises;
 const path = require('path');
+const timeoutService = require('./timeoutService');
 
 class Command{
-    constructor(commandModule, group){
+    constructor(commandModule, group, database){
         this.group = group;
         this.cmdmodule = commandModule;
+        this.timeout = new timeoutService(this.cmdmodule.command, this.cmdmodule.timeout * 1000 || 0, database);
         this.permissions = group.GROUP_PERMISSIONS.concat(commandModule.perms);
     }
 
@@ -16,6 +18,18 @@ class Command{
     }
 
     async run(client, message, args, services){
+        if(this.cmdmodule.timeout != 0){
+            let inTimeout = false;
+            let guild;
+            if(message.guild !== null){guild = message.guild.id}
+            else{guild = 'DM'}
+            inTimeout = await this.timeout.hasTimeout(guild, message.author.id);
+            if(inTimeout !== false){
+                await message.channel.send(services.CommandErrorEmbed(`You can use this command again in ${inTimeout} seconds.`).setTitle('Timeout'));
+                return;
+            }
+            await this.timeout.reset(guild, message.author.id, Date.now());
+        }
         await this.cmdmodule.run(client, message, args, services);
     }
 }
@@ -88,6 +102,7 @@ class CmdHandler{
 
     async registerCommandsAsync(cmdPath){
         let folders = await fs.readdir(cmdPath);
+        const timeoutTable = 'commandTimeout';
         let commandFiles = '';
         let commandGroups = [];
         
@@ -100,7 +115,10 @@ class CmdHandler{
             for(let file of commandFiles){
                 if(file.endsWith('.js') && !file.startsWith('_')){ // js files that start with an underscore are ignored
                     let commandModule = require(path.join(cmdPath, folder, file));
-                    this.commandsList.push(new Command(commandModule, groupParams));
+                    this.commandsList.push(new Command(commandModule, groupParams, this.services.database));
+                    // ensure all commands have a a place to store timeouts in database
+                    let sql = `ALTER TABLE ${timeoutTable} ADD ${commandModule.command} BIGINT NULL DEFAULT NULL`;
+                    await this.services.database.verifyColumn('commandTimeout', commandModule.command, sql);
                 }
             }
         }
