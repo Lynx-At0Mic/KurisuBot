@@ -28,9 +28,10 @@ class Command{
                 await message.channel.send(services.CommandErrorEmbed(`You can use this command again in ${inTimeout} seconds.`).setTitle('Timeout'));
                 return;
             }
-            await this.timeout.reset(guild, message.author.id, Date.now());
+            let dontTimeout = await this.cmdmodule.run(client, message, args, services);
+            if(dontTimeout !== true){await this.timeout.reset(guild, message.author.id, Date.now());}
         }
-        await this.cmdmodule.run(client, message, args, services);
+        else{await this.cmdmodule.run(client, message, args, services);}
     }
 }
 
