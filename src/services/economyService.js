@@ -5,7 +5,7 @@ class Economy{
     }
 
     async registerUser(guildid, userid){
-        await this.database.query(`INSERT INTO ${this.currencyTable} VALUES(${guildid}, ${userid}, 0, null)`)
+        await this.database.query(`INSERT INTO ${this.currencyTable} VALUES(${guildid}, ${userid}, 0)`)
     }
 
     async addFunds(guildid, userid, amount){
