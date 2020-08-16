@@ -7,6 +7,10 @@
         "USERNAME" : "USERNAME HERE",
         "PASSWORD" : "PASSWORD HERE",
         "DATABASE" : "DATABASE NAME HERE",
-        "HOST" : "HOST HERE"
+        "HOST" : "HOST HERE",
+
+        "TABLES" : {
+            "economy": "CREATE TABLE `economy` ( `guildID` VARCHAR(255) NOT NULL , `userID` VARCHAR(255) NOT NULL , `balance` INT NOT NULL, `dailyUsed` INT NULL DEFAULT NULL) ENGINE = InnoDB"
+        }
     }
 }

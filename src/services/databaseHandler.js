@@ -11,7 +11,21 @@ class Database{
             connectionLimit: 10,
             queueLimit: 0
         });
+        this.verifyTables(tables);
+    }
 
+    async verifyTables(tables){
+        let dbError = false;
+        for(let table in tables){
+            await this.db.query(`SELECT * FROM ${table}`)
+            .catch(async err => {
+                if(err.code = 'ER_NO_SUCH_TABLE'){
+                    await this.db.query(tables[table])  // create table using sql in config if table does not exist
+                }
+                else{dbError = true;}
+            });
+        }
+        if(dbError){throw new Error('Database error!');}
     }
     
     endConnection(){
