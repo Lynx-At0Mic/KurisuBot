@@ -22,7 +22,7 @@ class Command{
             let inTimeout = false;
             let guild;
             if(message.guild !== null){guild = message.guild.id}
-            else{guild = 'DM'}
+            else{guild = '\'DM\''}
             inTimeout = await this.timeout.hasTimeout(guild, message.author.id);
             if(inTimeout !== false){
                 await message.channel.send(services.CommandErrorEmbed(`You can use this command again in ${inTimeout} seconds.`).setTitle('Timeout'));
