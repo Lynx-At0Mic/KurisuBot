@@ -10,7 +10,7 @@ class Economy{
 
     async addFunds(guildid, userid, amount){
         let currentBalance = this.getFunds(guildid, userid);
-        let queryResult = await this.database.query(`UPDATE ${this.currencyTable} SET balance = ${currentBalance + amount} WHERE guildid = ${guildid} AND userID = ${userid}`);
+        let queryResult = await this.database.query(`UPDATE ${this.currencyTable} SET balance = ${currentBalance + amount} WHERE guildID = ${guildid} AND userID = ${userid}`);
         console.log(queryResult);
     }
 
@@ -19,7 +19,7 @@ class Economy{
         if(currentBalance - amount > 0){
             return 'Insufficiant funds!';
         }
-        let queryResult = await this.database.query(`UPDATE ${this.currencyTable} SET balance = ${currentBalance - amount} WHERE guildid = ${guildid} AND userID = ${userid}`);
+        let queryResult = await this.database.query(`UPDATE ${this.currencyTable} SET balance = ${currentBalance - amount} WHERE guildID = ${guildid} AND userID = ${userid}`);
         console.log(queryResult);
     }
 
