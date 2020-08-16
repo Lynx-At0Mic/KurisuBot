@@ -18,7 +18,7 @@ class Command{
     }
 
     async run(client, message, args, services){
-        if(this.cmdmodule.timeout != 0){
+        if(this.cmdmodule.timeout != 0 || this.cmdmodule.timeout != undefined){
             let inTimeout = false;
             let guild;
             if(message.guild !== null){guild = message.guild.id}
@@ -116,9 +116,11 @@ class CmdHandler{
                 if(file.endsWith('.js') && !file.startsWith('_')){ // js files that start with an underscore are ignored
                     let commandModule = require(path.join(cmdPath, folder, file));
                     this.commandsList.push(new Command(commandModule, groupParams, this.services.database));
-                    // ensure all commands have a a place to store timeouts in database
-                    let sql = `ALTER TABLE ${timeoutTable} ADD ${commandModule.command} BIGINT NULL DEFAULT NULL`;
-                    await this.services.database.verifyColumn('commandTimeout', commandModule.command, sql);
+                    // ensure all commands with a timeout have a a place to store timeouts in database
+                    if(commandModule.timeout != 0){
+                        let sql = `ALTER TABLE ${timeoutTable} ADD ${commandModule.command} BIGINT NULL DEFAULT NULL`;
+                        await this.services.database.verifyColumn('commandTimeout', commandModule.command, sql);
+                    }
                 }
             }
         }
