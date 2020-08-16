@@ -1,31 +1,27 @@
 let avatarAsync = async(client, message, args, services) => {
-    let guild = await client.guilds.resolve(message.guild.id);
-    let member;
-    let username;
-    let avURL;
-
-    if (args.length === 0){
-        member = await guild.member(message.author);
-        username = message.author.username;
-        avURL = await message.author.displayAvatarURL();
+    let url;
+    let user;
+    if(args.length === 0){
+        user = message.author;
+        url = await user.displayAvatarURL();
     }
-    else {
+    else{
         try{
-            member = await guild.member(message.mentions.members.first());
-            username = message.mentions.users.first().username;
-            avURL = await message.mentions.users.first().displayAvatarURL();
+            user = await message.mentions.users.first();
+            url = await user.displayAvatarURL();
         }
-        catch{
-            await message.channel.send('Sorry, i can\'t find that user');
-            return;
-        }
-
+        catch{}
     }
 
-    let nickname = member.nickname;
-    if (nickname === undefined || nickname === null){ nickname = username; }
-    await message.channel.send(`${nickname}'s avatar`);
-    await message.channel.send(avURL);
+    if(!url){
+        await message.channel.send(services.CommandErrorEmbed('Invalid user!'));
+        return;
+    }
+    let displayName;
+    if(message.guild !== null){displayName = await client.guilds.resolve(message.guild.id).member(user).nickname || user.username;}
+    else{displayName = user.username;}
+
+    await message.channel.send(`${displayName}'s avatar`, {files: [url]});
 }
 
 module.exports = {
@@ -35,7 +31,7 @@ module.exports = {
     perms: [],
     argsmin: 0,
     argsmax: 1,
-    guildOnly: true,
+    guildOnly: false,
     
     description: 'Gets a user\'s avatar.',
     example: [`av`, `av <user>`]
