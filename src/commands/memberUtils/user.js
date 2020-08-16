@@ -102,6 +102,7 @@ module.exports = {
     argsmin: 0,
     argsmax: 1,
     guildOnly: false,
+    timeout: 0,
     
     description: 'Gets information about the specified user.',
     example: ['user <user>', 'user @catte#1111', 'user']

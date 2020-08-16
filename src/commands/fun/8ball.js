@@ -26,6 +26,7 @@ module.exports = {
     argsmin: 1,
     argsmax: -1,
     guildOnly: false,
+    timeout: 0,
     
     description: 'Asks magic 8ball a question',
     example: ['8ball <question>', '8ball am i stupid']

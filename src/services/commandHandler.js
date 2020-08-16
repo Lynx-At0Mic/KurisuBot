@@ -18,7 +18,7 @@ class Command{
     }
 
     async run(client, message, args, services){
-        if(this.cmdmodule.timeout != 0 || this.cmdmodule.timeout != undefined){
+        if(this.cmdmodule.timeout != 0 && this.cmdmodule.timeout != undefined){
             let inTimeout = false;
             let guild;
             if(message.guild !== null){guild = message.guild.id}

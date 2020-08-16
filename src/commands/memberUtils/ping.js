@@ -27,6 +27,7 @@ module.exports = {
     argsmin: 0,
     argsmax: 0,
     guildOnly: false,
+    timeout: 0,
     
     description: 'Returns the bot\'s ping in milliseconds.',
     example: ['ping']

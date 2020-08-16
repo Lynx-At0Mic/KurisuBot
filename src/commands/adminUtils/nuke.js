@@ -37,6 +37,7 @@ module.exports = {
     argsmin: 0,
     argsmax: 0,
     guildOnly: true,
+    timeout: 0,
     
     description: 'Deletes the current channel and creates it again',
     example: ['nuke']

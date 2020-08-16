@@ -47,6 +47,7 @@ module.exports = {
     argsmin: 1,
     argsmax: -1,
     guildOnly: false,
+    timeout: 0,
     
     description: 'Captions the last image posted in chat.',
     example: ['caption You\'re going to brazil']

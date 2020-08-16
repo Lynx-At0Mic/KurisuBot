@@ -32,6 +32,7 @@ module.exports = {
     argsmin: 0,
     argsmax: 1,
     guildOnly: false,
+    timeout: 0,
     
     description: 'Gets a user\'s avatar.',
     example: [`av`, `av <user>`]

@@ -30,6 +30,7 @@ module.exports = {
     argsmin: 1,
     argsmax: 1,
     guildOnly: true,
+    timeout: 0,
     
     description: 'Deletes the last number of messages specified. Max value is 100.',
     example: ['clear 50', 'purge 100', 'cls 5']

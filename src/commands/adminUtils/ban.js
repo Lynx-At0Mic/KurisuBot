@@ -51,6 +51,7 @@ module.exports = {
     argsmin: 1,
     argsmax: -1,
     guildOnly: true,
+    timeout: 0,
     
     description: 'Bans the target member from the server. Reason is optional.',
     example: ['ban <user> <reason>','ban @catte#1111 being a weeb']

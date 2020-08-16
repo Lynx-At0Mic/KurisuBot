@@ -17,6 +17,7 @@ module.exports = {
     argsmin: 0,
     argsmax: 0,
     guildOnly: true,
+    timeout: 0,
     
     description: 'Shows balance of yourself or another user.',
     example: ['balance', 'bal <user>']

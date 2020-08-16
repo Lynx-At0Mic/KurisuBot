@@ -97,6 +97,7 @@ module.exports = {
     argsmin: 0,
     argsmax: 2,
     guildOnly: false,
+    timeout: 0,
     
     description: 'Shows information about all commands.',
     example: ['help', 'help av', 'help member_utilities']
