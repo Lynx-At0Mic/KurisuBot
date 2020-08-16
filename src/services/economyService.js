@@ -9,13 +9,14 @@ class Economy{
     }
 
     async addFunds(guildid, userid, amount){
-        let currentBalance = this.getFunds(guildid, userid);
+        let currentBalance = await this.getFunds(guildid, userid);
         let queryResult = await this.database.query(`UPDATE ${this.currencyTable} SET balance = ${currentBalance + amount} WHERE guildID = ${guildid} AND userID = ${userid}`);
-        console.log(queryResult);
+        if(queryResult === undefined){return true;}
+        return false;
     }
 
     async removeFunds(guildid, userid, amount){
-        let currentBalance = this.getFunds(guildid, userid);
+        let currentBalance = await this.getFunds(guildid, userid);
         if(currentBalance - amount > 0){
             return 'Insufficiant funds!';
         }
