@@ -12,6 +12,12 @@ module.exports = {
             }
         });
 
-        return attachmentList[0] || false;
+        if(attachmentList[0]){
+			if(attachmentList[0].name.endsWith('png') || attachmentList[0].name.endsWith('jpg') || attachmentList[0].name.endsWith('jpeg')){
+				return attachmentList[0];
+			}
+		}
+
+        return false;
     }
 }
